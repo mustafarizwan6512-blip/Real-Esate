@@ -1,6 +1,6 @@
 {
   "name": "REFERESTATES",
-  "description": "Luxury real estate platform in Saudi Arabia with comprehensive admin management system for properties, developers, leads, media, and site content.",
+  "description": "Saudi Arabia luxury real estate platform featuring curated off-plan developments like AL REHAB CENTER, REGA compliance, Google Analytics GA4, Search Console verification, and XML sitemaps.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

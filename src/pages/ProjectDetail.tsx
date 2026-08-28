@@ -9,6 +9,9 @@ import {
 } from '../api';
 import { Project } from '../types';
 import ProjectCard from '../components/ProjectCard';
+import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { trackWhatsAppClick, trackLeadSubmission, trackPhoneClick, trackBrochureDownload } from '../utils/analytics';
 import { 
   MapPin, 
   Building2, 
@@ -265,8 +268,48 @@ export default function ProjectDetail() {
     );
   }
 
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": project.name,
+    "description": project.short_description || project.description,
+    "image": project.hero_image_url || project.images[0] || "/al-rehab-center.webp",
+    "url": typeof window !== 'undefined' ? window.location.href : `https://referestates.com/projects/${project.slug || project.id}`,
+    "offers": {
+      "@type": "Offer",
+      "price": project.starting_price || 390000,
+      "priceCurrency": project.currency || "SAR",
+      "availability": project.status === 'Sold Out' ? "https://schema.org/SoldOut" : "https://schema.org/InStock",
+      "validFrom": "2026-01-01"
+    },
+    "containedInPlace": {
+      "@type": "Place",
+      "name": project.location || project.city,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": project.city,
+        "addressCountry": "SA"
+      }
+    }
+  };
+
   return (
     <div className="w-full bg-cream text-secondary">
+      <SEO 
+        title={`${project.name} | ${project.city} Real Estate | REFERESTATES`}
+        description={project.seo_description || project.short_description || `${project.name} in ${project.city}. Starting price ${formattedPrice || 'SAR 390k'}. Discover specifications, floor plans, and Wafi escrow details with REFERESTATES.`}
+        image={project.hero_image_url || project.images[0]}
+        canonical={`https://referestates.com/projects/${project.slug || project.id}`}
+        jsonLd={projectJsonLd}
+        keywords={[
+          project.name,
+          `${project.name} ${project.city}`,
+          project.developer || "Saudi Real Estate",
+          "Saudi Off Plan",
+          "Wafi Escrow Protection",
+          "Jeddah Luxury Property"
+        ]}
+      />
 
       {/* =========================================================================
           1. CINEMATIC HERO SECTION
@@ -276,20 +319,26 @@ export default function ProjectDetail() {
         <div className="absolute inset-0 z-0">
           <img 
             src={project.hero_image_url || project.images[0]} 
-            alt={project.name}
+            alt={`${project.name} - ${project.category || 'Luxury Property'} in ${project.city}, Saudi Arabia`}
             className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000 ease-out"
+            fetchPriority="high"
+            decoding="async"
             referrerPolicy="no-referrer"
           />
           {/* Brand Gradient matching Home hero */}
           <div className="absolute inset-0 bg-gradient-to-t from-secondary/95 via-secondary/60 to-secondary/30" />
         </div>
 
-        {/* Top Floating Badge Bar */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between pt-4">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-primary text-cream font-display font-bold text-[10px] uppercase tracking-[0.15em]">
+        {/* Top Floating Badge Bar & Breadcrumbs */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col sm:flex-row sm:items-center justify-between pt-4 gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
+            <Link to="/projects" className="text-cream/70 hover:text-cream text-xs font-display uppercase tracking-wider transition-colors">
+              ← All Projects
+            </Link>
+            <span className="text-cream/30 text-xs">/</span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary text-cream font-display font-bold text-[10px] uppercase tracking-[0.15em]">
               <span className="w-1.5 h-1.5 rounded-full bg-cream animate-pulse" />
-              {project.status || 'Available'}
+              {project.status || 'Under Construction'}
             </span>
             <span className="hidden sm:inline-block text-cream/40 text-xs">|</span>
             <span className="hidden sm:inline-block text-cream/80 text-xs font-display font-semibold tracking-wider uppercase">
@@ -297,13 +346,14 @@ export default function ProjectDetail() {
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 self-end sm:self-auto">
             <button
               onClick={handleShare}
-              className="p-2.5 bg-secondary/80 backdrop-blur-md border border-cream/20 text-cream hover:text-primary hover:border-primary transition-colors"
+              className="p-2.5 bg-secondary/80 backdrop-blur-md border border-cream/20 text-cream hover:text-primary hover:border-primary transition-colors flex items-center gap-1.5 text-xs font-display"
               title="Share Project"
             >
-              <Share2 size={16} />
+              <Share2 size={15} />
+              <span className="hidden sm:inline">Share</span>
             </button>
             {copiedLink && (
               <span className="text-[11px] bg-primary text-cream font-display font-bold px-3 py-1 shadow-lg">

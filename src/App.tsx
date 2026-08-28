@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Contact from './pages/Contact';
+import MobileStickyBar from './components/MobileStickyBar';
 import AdminLayout from './components/admin/AdminLayout';
 import Login from './pages/admin/Login';
 import ResetPassword from './pages/admin/ResetPassword';
@@ -50,6 +51,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => (
     <main className="flex-grow">
       {children}
     </main>
+    <MobileStickyBar />
     <Footer />
   </div>
 );

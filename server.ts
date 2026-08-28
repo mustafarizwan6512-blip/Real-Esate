@@ -111,6 +111,39 @@ async function startServer() {
   app.use(cors());
   app.use(express.json());
 
+  // --- SEO & Crawlers ---
+  app.get("/robots.txt", (req, res) => {
+    res.type("text/plain");
+    res.send("User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://referestates.com/sitemap.xml\n");
+  });
+
+  app.get("/sitemap.xml", (req, res) => {
+    res.type("application/xml");
+    const urls = [
+      { loc: "https://referestates.com/", priority: "1.0", changefreq: "daily" },
+      { loc: "https://referestates.com/projects", priority: "0.9", changefreq: "daily" },
+      { loc: "https://referestates.com/projects/al-rehab-center", priority: "0.95", changefreq: "weekly" },
+      { loc: "https://referestates.com/contact", priority: "0.7", changefreq: "monthly" }
+    ];
+
+    db.projects.forEach(p => {
+      if (p.id !== "1") {
+        urls.push({ loc: `https://referestates.com/projects/${p.id}`, priority: "0.8", changefreq: "weekly" });
+      }
+    });
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+    res.send(xml);
+  });
+
   // --- API Routes ---
   
   // Public Routes

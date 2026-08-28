@@ -371,36 +371,36 @@ export default function ProjectDetail() {
 
         {/* Bottom Hero Quick Specs Bar */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 bg-surface border border-secondary/10 shadow-xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-6 bg-surface border border-secondary/10 shadow-xl">
             {/* Spec 1: Price */}
-            <div className="space-y-1 border-r border-secondary/10 pr-4 last:border-0">
+            <div className="space-y-1 border-r border-secondary/10 pr-3 sm:pr-4 last:border-0">
               <span className="block text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary">Starting Price</span>
-              <p className="text-base sm:text-xl font-display font-bold text-secondary truncate">
+              <p className="text-xs sm:text-sm md:text-base font-display font-bold text-secondary break-words">
                 {formattedPrice ? formattedPrice : 'Price on Inquiry'}
               </p>
             </div>
 
             {/* Spec 2: Type */}
-            <div className="space-y-1 border-r border-secondary/10 pr-4 last:border-0">
+            <div className="space-y-1 border-r border-secondary/10 pr-3 sm:pr-4 last:border-0">
               <span className="block text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary">Property Type</span>
-              <p className="text-base sm:text-xl font-display font-bold text-secondary truncate">
+              <p className="text-[11px] sm:text-xs md:text-sm font-display font-bold text-secondary break-words leading-snug">
                 {project.category || project.property_type || 'Residential'}
               </p>
             </div>
 
-            {/* Spec 3: Handover */}
-            <div className="space-y-1 border-r border-secondary/10 pr-4 last:border-0">
-              <span className="block text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary">Handover / Status</span>
-              <p className="text-base sm:text-xl font-display font-bold text-secondary truncate">
-                {project.handover_date || project.status || 'Immediate'}
+            {/* Spec 3: Status */}
+            <div className="space-y-1 border-r border-secondary/10 pr-3 sm:pr-4 last:border-0">
+              <span className="block text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary">Status</span>
+              <p className="text-xs sm:text-sm md:text-base font-display font-bold text-secondary break-words">
+                {project.status || 'Under Construction'}
               </p>
             </div>
 
             {/* Spec 4: Location */}
             <div className="space-y-1">
               <span className="block text-[10px] font-display font-bold uppercase tracking-[0.2em] text-primary">Location</span>
-              <p className="text-base sm:text-xl font-display font-bold text-secondary truncate">
-                {project.district ? `${project.district}, ${project.city}` : project.city}
+              <p className="text-xs sm:text-sm md:text-base font-display font-bold text-secondary break-words">
+                {project.location || (project.district ? `${project.district}, ${project.city}` : project.city)}
               </p>
             </div>
           </div>
@@ -734,7 +734,7 @@ export default function ProjectDetail() {
                 Detailed Property Specs
               </h2>
               <p className="text-sm text-secondary/70 leading-relaxed font-body">
-                Comprehensive data covering room configurations, built-up area metrics, furnishing specifications, and flexible payment arrangements.
+                Comprehensive data covering room configurations, built-up area metrics, furnishing specifications, and master developer details.
               </p>
             </div>
 
@@ -744,7 +744,7 @@ export default function ProjectDetail() {
                   <div className="flex items-center justify-between p-5">
                     <span className="text-xs uppercase tracking-wider text-secondary/60 font-display font-bold flex items-center gap-2">
                       <Bed size={15} className="text-primary" />
-                      <span>Bedrooms</span>
+                      <span>Bedrooms / Units</span>
                     </span>
                     <span className="text-sm font-display font-bold text-secondary">{project.bedrooms}</span>
                   </div>
@@ -777,26 +777,6 @@ export default function ProjectDetail() {
                       <span>Furnishing Specification</span>
                     </span>
                     <span className="text-sm font-display font-bold text-secondary">{project.furnished_status}</span>
-                  </div>
-                )}
-
-                {project.payment_plan && (
-                  <div className="flex items-center justify-between p-5">
-                    <span className="text-xs uppercase tracking-wider text-secondary/60 font-display font-bold flex items-center gap-2">
-                      <DollarSign size={15} className="text-primary" />
-                      <span>Payment Plan</span>
-                    </span>
-                    <span className="text-sm font-display font-bold text-primary text-right max-w-xs">{project.payment_plan}</span>
-                  </div>
-                )}
-
-                {project.handover_date && (
-                  <div className="flex items-center justify-between p-5">
-                    <span className="text-xs uppercase tracking-wider text-secondary/60 font-display font-bold flex items-center gap-2">
-                      <Calendar size={15} className="text-primary" />
-                      <span>Handover Target</span>
-                    </span>
-                    <span className="text-sm font-display font-bold text-secondary">{project.handover_date}</span>
                   </div>
                 )}
 

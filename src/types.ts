@@ -54,7 +54,7 @@ export interface Project {
   payment_plan?: string;
   handover_date?: string;
   furnished_status?: string;
-  status: 'Available' | 'Limited Availability' | 'Coming Soon' | 'Sold Out' | 'Temporarily Unavailable' | 'Hidden';
+  status: 'Available' | 'Limited Availability' | 'Coming Soon' | 'Sold Out' | 'Temporarily Unavailable' | 'Hidden' | 'Under Construction' | string;
   featured: boolean;
   hero_image_url?: string;
   floor_plan_url?: string;

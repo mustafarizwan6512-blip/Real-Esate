@@ -10,21 +10,20 @@ export const fallbackProjects: Project[] = [
     developer: "Tamleek Al Nahdi",
     city: "Jeddah",
     district: "Al Rehab District",
-    address: "Palestine Street / Prince Mutaib Axis, Al Rehab, Jeddah",
+    address: "Prince Mutaib bin Abdulaziz Road, Al Rehab, Jeddah",
     location: "Al Rehab, Jeddah",
-    category: "Commercial & Luxury Residential Complex",
-    property_type: "Commercial & Residential Center",
-    description: "A monumental contemporary landmark fusing boutique ground-floor commercial retail with luxury residential living. Designed for discerning buyers seeking serene private architecture, illuminated vertical fins, and seamless access to Jeddah's prime commercial arteries.",
-    short_description: "A refined mixed-use commercial and residential landmark in the heart of Jeddah by Tamleek Al Nahdi.",
-    bedrooms: "2, 3 & 4 Bedrooms + Commercial Suites",
-    bathrooms: "3 - 5 Bathrooms",
-    size: "185 – 540 sqm",
-    starting_price: 1850000,
+    category: "Premium Mixed-Use (Commercial & Residential)",
+    property_type: "Premium Mixed-Use (Commercial & Residential)",
+    description: "A prominent mixed-use development situated directly on Prince Mutaib bin Abdulaziz Road in Al Rehab District, Jeddah. Developed by Tamleek Al Nahdi, AL REHAB CENTER combines premier ground-floor commercial showrooms and retail boutiques with luxury residential suites, secure basement parking, and expansive private rooftop terraces.",
+    short_description: "Premium mixed-use commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi.",
+    bedrooms: "Commercial Showrooms & Residential Suites",
+    bathrooms: "1 - 4 Bathrooms",
+    size: "63.74m² - 311.80 m²",
+    starting_price: 390000,
     currency: "SAR",
-    payment_plan: "10% Down Payment / 4-Year Flexible Construction-Linked Installments",
-    handover_date: "Q4 2026",
-    furnished_status: "Bespoke Italian Kitchens & Luxury Fitted Bathrooms",
-    status: "Available",
+    handover_date: "12/2027",
+    furnished_status: "Premium High Specification",
+    status: "Under Construction",
     featured: true,
     hero_image_url: "/al-rehab-center.webp",
     floor_plan_url: "",
@@ -33,85 +32,86 @@ export const fallbackProjects: Project[] = [
     brochure_url: "",
     latitude: 21.5433,
     longitude: 39.1728,
-    seo_title: "AL REHAB CENTER Jeddah | REFERESTATES Private Discovery",
-    seo_description: "Discover AL REHAB CENTER in Jeddah by Tamleek Al Nahdi. Exceptional commercial suites, retail boutiques, and luxury residences presented by REFERESTATES.",
+    seo_title: "AL REHAB CENTER Jeddah | Tamleek Al Nahdi | REFERESTATES",
+    seo_description: "Discover AL REHAB CENTER in Jeddah by Tamleek Al Nahdi. Starting from SAR 390k, 63.74m² - 311.80 m², Handover 12/2027. Commercial showrooms & residential luxury suites.",
     images: [
       "/al-rehab-center.webp",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=85",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
-      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+      "/rehab-facade.jpg",
+      "/rehab-living-room.jpg",
+      "/rehab-bedroom.jpg",
+      "/rehab-staircase.jpg"
     ],
     highlights: [
       {
-        title: "Prime Central Axis",
-        description: "Strategically located in Al Rehab with instant access to Palestine Road and the Jeddah Corniche corridor.",
-        icon: "Compass"
+        title: "SPORTS & WELLNESS DISTRICT",
+        description: "Situated just 250 meters from extensive public parks that feature dedicated sports clubs and premium athletic playgrounds.",
+        icon: "Dumbbell"
       },
       {
-        title: "Architectural Grandeur",
-        description: "Modernist multi-tower stone facade engineered with illuminated vertical accent fins and acoustic glazing.",
-        icon: "Building2"
+        title: "COMMUNITY PARK & GARDENS",
+        description: "Only 70 meters away from the peaceful Al-Suroor Garden and local mosque, offering beautiful green spaces right nearby.",
+        icon: "Trees"
       },
       {
-        title: "Ground-Floor Boutique Promenade",
-        description: "Vibrant ground level featuring specialty cafes, wellness salons, and curated lifestyle boutiques.",
+        title: "INTEGRATED SHOPPING CORRIDOR",
+        description: "Located immediately adjacent to multiple commercial showrooms and retail malls for absolute convenience.",
         icon: "ShoppingBag"
       },
       {
-        title: "Integrated Smart Living",
-        description: "Full KNX home automation with biometric keyless entry and climate optimization.",
-        icon: "Sparkles"
-      },
-      {
-        title: "Secure Street & Subterranean Parking",
-        description: "Dedicated front-street and basement monitored parking bays with EV charging stations.",
+        title: "SECURE BASEMENT PARKING",
+        description: "A massive, high-capacity underground garage providing 98 secure and designated vehicle parking slots for residents.",
         icon: "ShieldCheck"
       },
       {
-        title: "High Investment Yield",
-        description: "Strong capital appreciation and high commercial & residential tenant demand in Jeddah's hub.",
-        icon: "DollarSign"
+        title: "MAIN ROAD ACCESSIBILITY",
+        description: "Perfectly positioned with a direct premium frontage right on Prince Mutaib bin Abdulaziz Road for effortless transit.",
+        icon: "Compass"
+      },
+      {
+        title: "EXCLUSIVE ROOFTOP TERRACES",
+        description: "Luxury rooftop penthouse units featuring expansive, private front and rear open-air terraces.",
+        icon: "Sparkles"
       }
     ],
     amenities: [
-      { title: "Ground-Level Boutique Arcade", description: "Curated artisanal cafes, specialty dining, and retail storefronts.", icon: "ShoppingBag" },
-      { title: "Executive Health Club & Gym", description: "Fully outfitted with state-of-the-art cardiovascular and strength systems.", icon: "Dumbbell" },
-      { title: "24/7 Dedicated Concierge", description: "White-glove reception, parcel management, and security staff.", icon: "Award" },
-      { title: "Private Business Lounge", description: "Sophisticated lounge and meeting suites for commercial hosting.", icon: "Coffee" },
-      { title: "Landscaped Promenade", description: "Pedestrian-friendly sidewalks with native greenery and outdoor seating.", icon: "Trees" },
-      { title: "Smart Access & 24/7 Surveillance", description: "CCTV security perimeter and high-speed encrypted elevators.", icon: "Shield" }
+      { title: "Ground-Level Commercial Showrooms", description: "Boutique retail, cafes, and business spaces with prominent street frontage.", icon: "ShoppingBag" },
+      { title: "98 Underground Parking Slots", description: "Expansive multi-bay subterranean parking with secured automated access.", icon: "Car" },
+      { title: "Private Penthouse Terraces", description: "Dual-aspect front and rear open-air rooftop terraces.", icon: "Sparkles" },
+      { title: "24/7 Monitored Security", description: "Dedicated surveillance cameras and building access control.", icon: "Shield" },
+      { title: "High-Speed Elevators", description: "Modern rapid passenger elevators serving all residential and retail levels.", icon: "Building2" },
+      { title: "Al-Suroor Garden Proximity", description: "Direct 70m walk to lush municipal gardens and local mosque.", icon: "Trees" }
     ],
     nearby_places: [
+      { name: "Al - Waha International School for Girls", category: "School", distance: "Nearby", time: "3 mins" },
+      { name: "Al Baik, McDonald's", category: "Restaurants", distance: "Walking Distance", time: "2 mins" },
+      { name: "Imam Abu Hanifa Mosque", category: "Mosque", distance: "70 m", time: "1 min" },
+      { name: "Al-Suroor Garden & Park", category: "Community Park", distance: "70 m", time: "1 min" },
+      { name: "Prince Mutaib bin Abdulaziz Road", category: "Main Arterial Axis", distance: "Direct Frontage", time: "Immediate" },
       { name: "Jeddah Waterfront & Corniche", category: "Leisure & Coastal", distance: "8.5 km", time: "12 mins" },
-      { name: "King Abdulaziz International Airport (JED)", category: "Aviation Hub", distance: "18.0 km", time: "18 mins" },
-      { name: "Al Andalus Mall & Town Square", category: "Retail & Dining", distance: "4.2 km", time: "7 mins" },
-      { name: "International Medical Center (IMC)", category: "Healthcare", distance: "5.1 km", time: "9 mins" },
-      { name: "King Abdulaziz University Campus", category: "Education", distance: "6.0 km", time: "10 mins" },
-      { name: "Madinah Highway Arterial Link", category: "Transportation", distance: "2.0 km", time: "3 mins" }
+      { name: "King Abdulaziz International Airport (JED)", category: "Aviation Hub", distance: "18.0 km", time: "18 mins" }
     ],
     why_consider: [
       {
         title: "Developed by Tamleek Al Nahdi",
-        description: "Delivered with trusted local expertise, stringent construction governance, and transparent milestone tracking."
+        description: "Delivered with proven architectural expertise, rigorous quality standards, and dependable delivery execution."
       },
       {
-        title: "Strategic Al Rehab Location Advantage",
-        description: "Centrally positioned with effortless vehicular transit across major Jeddah expressways and commercial zones."
+        title: "Direct Prince Mutaib Road Frontage",
+        description: "Unrivaled visibility and effortless vehicular connectivity to Jeddah's principal commercial arteries."
       },
       {
-        title: "Dual Commercial & Residential Appeal",
-        description: "Combines high-footfall street-level retail with tranquil upper-floor residential suites for diverse revenue potential."
+        title: "Attractive Starting Price from SAR 390k",
+        description: "Highly competitive entry price for premium mixed-use units spanning from 63.74m² to 311.80 m²."
       },
       {
-        title: "Enduring Asset Quality",
-        description: "High-grade exterior cladding, robust MEP infrastructure, and energy-efficient climate envelope."
+        title: "Handover Scheduled for 12/2027",
+        description: "Clear construction roadmap with targeted handover in December 2027."
       }
     ],
     unit_types: [
-      { type: "Executive 2-Bedroom Suite", beds: "2 Beds", bathrooms: "2.5 Baths", size: "185 sqm", price: "From SAR 1,850,000", availability: "Available" },
-      { type: "Luxury 3-Bedroom Residence", beds: "3 Beds + Maid", bathrooms: "4 Baths", size: "260 sqm", price: "From SAR 2,450,000", availability: "Limited" },
-      { type: "Commercial Retail Storefront", beds: "Retail Floor", bathrooms: "2 Baths", size: "140 – 350 sqm", price: "Price Upon Application", availability: "Available" }
+      { type: "Commercial Boutique & Showroom", beds: "Retail Floor", bathrooms: "1 - 2 Baths", size: "63.74m² - 311.80 m²", price: "Starting from SAR 390,000", availability: "Under Construction" },
+      { type: "Luxury Residential Suite", beds: "Executive Suite", bathrooms: "2 - 4 Baths", size: "63.74m² - 311.80 m²", price: "Starting from SAR 390,000", availability: "Under Construction" },
+      { type: "Penthouse with Private Terraces", beds: "Penthouse", bathrooms: "3 - 4 Baths", size: "Up to 311.80 m²", price: "Starting from SAR 390,000", availability: "Under Construction" }
     ]
   },
   {
@@ -121,43 +121,76 @@ export const fallbackProjects: Project[] = [
     developer: "Tamleek Al Nahdi",
     city: "Jeddah",
     district: "Al Rehab District",
-    address: "Al Rehab, Jeddah, Saudi Arabia",
+    address: "Prince Mutaib bin Abdulaziz Road, Al Rehab, Jeddah",
     location: "Al Rehab, Jeddah",
-    category: "Commercial & Luxury Residential Complex",
-    property_type: "Commercial & Residential Center",
-    description: "A premier commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi, featuring illuminated facade architecture, ground floor boutique retail, and luxury residential apartments.",
-    short_description: "Modern commercial & residential landmark in Jeddah by Tamleek Al Nahdi.",
-    bedrooms: "2, 3 & 4 Bedrooms",
-    bathrooms: "3 - 5 Bathrooms",
-    size: "185 – 520 sqm",
-    starting_price: 1850000,
+    category: "Premium Mixed-Use (Commercial & Residential)",
+    property_type: "Premium Mixed-Use (Commercial & Residential)",
+    description: "A prominent mixed-use development situated directly on Prince Mutaib bin Abdulaziz Road in Al Rehab District, Jeddah. Developed by Tamleek Al Nahdi, AL REHAB CENTER combines premier ground-floor commercial showrooms and retail boutiques with luxury residential suites, secure basement parking, and expansive private rooftop terraces.",
+    short_description: "Premium mixed-use commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi.",
+    bedrooms: "Commercial Showrooms & Residential Suites",
+    bathrooms: "1 - 4 Bathrooms",
+    size: "63.74m² - 311.80 m²",
+    starting_price: 390000,
     currency: "SAR",
-    payment_plan: "Flexible Construction-Linked Installments",
-    handover_date: "Q4 2026",
+    handover_date: "12/2027",
     furnished_status: "Premium High Specification",
-    status: "Available",
+    status: "Under Construction",
     featured: true,
     hero_image_url: "/al-rehab-center.webp",
     images: [
       "/al-rehab-center.webp",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=85",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+      "/rehab-facade.jpg",
+      "/rehab-living-room.jpg",
+      "/rehab-bedroom.jpg",
+      "/rehab-staircase.jpg"
     ],
     highlights: [
-      { title: "Prime Jeddah Hub", description: "Conveniently situated in Al Rehab with seamless arterial connectivity.", icon: "Compass" },
-      { title: "Illuminated Modern Facade", description: "Distinctive architectural lighting fins and commercial storefronts.", icon: "Building2" },
-      { title: "24/7 Security & CCTV", description: "Round-the-clock facility surveillance and access management.", icon: "ShieldCheck" }
+      {
+        title: "SPORTS & WELLNESS DISTRICT",
+        description: "Situated just 250 meters from extensive public parks that feature dedicated sports clubs and premium athletic playgrounds.",
+        icon: "Dumbbell"
+      },
+      {
+        title: "COMMUNITY PARK & GARDENS",
+        description: "Only 70 meters away from the peaceful Al-Suroor Garden and local mosque, offering beautiful green spaces right nearby.",
+        icon: "Trees"
+      },
+      {
+        title: "INTEGRATED SHOPPING CORRIDOR",
+        description: "Located immediately adjacent to multiple commercial showrooms and retail malls for absolute convenience.",
+        icon: "ShoppingBag"
+      },
+      {
+        title: "SECURE BASEMENT PARKING",
+        description: "A massive, high-capacity underground garage providing 98 secure and designated vehicle parking slots for residents.",
+        icon: "ShieldCheck"
+      },
+      {
+        title: "MAIN ROAD ACCESSIBILITY",
+        description: "Perfectly positioned with a direct premium frontage right on Prince Mutaib bin Abdulaziz Road for effortless transit.",
+        icon: "Compass"
+      },
+      {
+        title: "EXCLUSIVE ROOFTOP TERRACES",
+        description: "Luxury rooftop penthouse units featuring expansive, private front and rear open-air terraces.",
+        icon: "Sparkles"
+      }
     ],
     amenities: [
-      { title: "Ground Floor Boutiques", description: "Artisanal cafes, salons, and retail shops.", icon: "ShoppingBag" },
-      { title: "Fitness & Wellness", description: "Equipped cardiovascular and training suites.", icon: "Dumbbell" }
+      { title: "Ground-Level Commercial Showrooms", description: "Boutique retail, cafes, and business spaces.", icon: "ShoppingBag" },
+      { title: "98 Underground Parking Slots", description: "Secured automated parking garage.", icon: "Car" }
     ],
     nearby_places: [
-      { name: "Jeddah Corniche & Waterfront", category: "Leisure", distance: "8.5 km", time: "12 mins" },
-      { name: "King Abdulaziz Airport", category: "Airport", distance: "18 km", time: "18 mins" }
+      { name: "Al - Waha International School for Girls", category: "School", distance: "Nearby", time: "3 mins" },
+      { name: "Al Baik, McDonald's", category: "Restaurants", distance: "Walking Distance", time: "2 mins" },
+      { name: "Imam Abu Hanifa Mosque", category: "Mosque", distance: "70 m", time: "1 min" },
+      { name: "Al-Suroor Garden & Park", category: "Community Park", distance: "70 m", time: "1 min" },
+      { name: "Prince Mutaib bin Abdulaziz Road", category: "Main Arterial Axis", distance: "Direct Frontage", time: "Immediate" },
+      { name: "Jeddah Waterfront & Corniche", category: "Leisure & Coastal", distance: "8.5 km", time: "12 mins" },
+      { name: "King Abdulaziz International Airport (JED)", category: "Aviation Hub", distance: "18.0 km", time: "18 mins" }
     ],
     why_consider: [
-      { title: "By Tamleek Al Nahdi", description: "Proven track record with high architectural and delivery standards." },
+      { title: "Developed by Tamleek Al Nahdi", description: "Proven track record with high architectural and delivery standards." },
       { title: "Strategic Al Rehab Hub", description: "Centrally positioned in Jeddah with consistent high tenant demand." }
     ]
   }
@@ -257,15 +290,23 @@ export async function fetchProjects(): Promise<Project[]> {
     
     // Map Supabase schema to frontend schema
     return data.map((p: any) => {
-      const isBoulevard = (p.name && /boulevard/i.test(p.name)) || (p.slug && /boulevard/i.test(p.slug));
+      const isRehab = (p.name && (/rehab/i.test(p.name) || /boulevard/i.test(p.name))) || (p.slug && (/rehab/i.test(p.slug) || /boulevard/i.test(p.slug)));
       const notesJson = parseNotesJson(p.notes);
       const mediaImages = (p.property_media || [])
         .filter((m: any) => !m.media_type || m.media_type === 'image')
         .sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0))
         .map((m: any) => m.url);
 
-      const allImages = isBoulevard 
-        ? ["/al-rehab-center.webp", ...mediaImages]
+      const rehabImages = [
+        "/al-rehab-center.webp",
+        "/rehab-facade.jpg",
+        "/rehab-living-room.jpg",
+        "/rehab-bedroom.jpg",
+        "/rehab-staircase.jpg"
+      ];
+
+      const allImages = isRehab 
+        ? rehabImages
         : (p.hero_image_url 
           ? [p.hero_image_url, ...mediaImages.filter((u: string) => u !== p.hero_image_url)]
           : mediaImages.length > 0 
@@ -274,44 +315,44 @@ export async function fetchProjects(): Promise<Project[]> {
 
       return {
         id: p.id,
-        slug: isBoulevard ? 'al-rehab-center' : (p.slug || p.id),
-        name: isBoulevard ? 'AL REHAB CENTER' : p.name,
-        developer: isBoulevard ? 'Tamleek Al Nahdi' : (p.developers?.name || notesJson.developer_name || 'Independent Luxury Developer'),
+        slug: isRehab ? 'al-rehab-center' : (p.slug || p.id),
+        name: isRehab ? 'AL REHAB CENTER' : p.name,
+        developer: isRehab ? 'Tamleek Al Nahdi' : (p.developers?.name || notesJson.developer_name || 'Independent Luxury Developer'),
         developer_id: p.developer_id,
-        city: isBoulevard ? 'Jeddah' : (p.city || 'Riyadh'),
-        district: isBoulevard ? 'Al Rehab District' : (p.district || ''),
-        address: isBoulevard ? 'Palestine Street / Prince Mutaib Axis, Al Rehab, Jeddah' : (p.address || ''),
-        location: isBoulevard ? 'Al Rehab, Jeddah' : (p.district ? `${p.district}, ${p.city}` : p.city),
-        category: isBoulevard ? 'Commercial & Luxury Residential Complex' : (p.property_type || 'Residential'),
-        property_type: isBoulevard ? 'Commercial & Residential Center' : (p.property_type || 'Residential'),
-        description: isBoulevard ? 'A premier commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi, featuring illuminated facade architecture, ground floor boutique retail, and luxury residential apartments.' : (p.description || p.short_description || 'A prime luxury property offering curated living in Saudi Arabia.'),
-        short_description: isBoulevard ? 'Modern commercial & residential landmark in Jeddah by Tamleek Al Nahdi.' : (p.short_description || p.description?.substring(0, 150) || ''),
-        bedrooms: p.bedrooms || '',
-        bathrooms: p.bathrooms || '',
-        size: p.size || '',
-        starting_price: p.starting_price ? Number(p.starting_price) : undefined,
+        city: isRehab ? 'Jeddah' : (p.city || 'Riyadh'),
+        district: isRehab ? 'Al Rehab District' : (p.district || ''),
+        address: isRehab ? 'Prince Mutaib bin Abdulaziz Road, Al Rehab, Jeddah' : (p.address || ''),
+        location: isRehab ? 'Al Rehab, Jeddah' : (p.district ? `${p.district}, ${p.city}` : p.city),
+        category: isRehab ? 'Premium Mixed-Use (Commercial & Residential)' : (p.property_type || 'Residential'),
+        property_type: isRehab ? 'Premium Mixed-Use (Commercial & Residential)' : (p.property_type || 'Residential'),
+        description: isRehab ? 'A prominent mixed-use development situated directly on Prince Mutaib bin Abdulaziz Road in Al Rehab District, Jeddah. Developed by Tamleek Al Nahdi, AL REHAB CENTER combines premier ground-floor commercial showrooms and retail boutiques with luxury residential suites, secure basement parking, and expansive private rooftop terraces.' : (p.description || p.short_description || 'A prime luxury property offering curated living in Saudi Arabia.'),
+        short_description: isRehab ? 'Premium mixed-use commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi.' : (p.short_description || p.description?.substring(0, 150) || ''),
+        bedrooms: isRehab ? 'Commercial Showrooms & Residential Suites' : (p.bedrooms || ''),
+        bathrooms: isRehab ? '1 - 4 Bathrooms' : (p.bathrooms || ''),
+        size: isRehab ? '63.74m² - 311.80 m²' : (p.size || ''),
+        starting_price: isRehab ? 390000 : (p.starting_price ? Number(p.starting_price) : undefined),
         currency: p.currency || 'SAR',
-        payment_plan: p.payment_plan || '',
-        handover_date: p.handover_date || '',
-        furnished_status: p.furnished_status || 'Unfurnished',
-        status: p.status || 'Available',
+        payment_plan: isRehab ? '' : (p.payment_plan || ''),
+        handover_date: isRehab ? '12/2027' : (p.handover_date || ''),
+        furnished_status: isRehab ? 'Premium High Specification' : (p.furnished_status || 'Unfurnished'),
+        status: isRehab ? 'Under Construction' : (p.status || 'Available'),
         featured: Boolean(p.featured),
-        hero_image_url: isBoulevard ? "/al-rehab-center.webp" : (p.hero_image_url || allImages[0]),
+        hero_image_url: isRehab ? "/al-rehab-center.webp" : (p.hero_image_url || allImages[0]),
         floor_plan_url: p.floor_plan_url || notesJson.floor_plan_url || '',
         video_url: notesJson.video_url || '',
         virtual_tour_url: notesJson.virtual_tour_url || '',
         brochure_url: notesJson.brochure_url || '',
         latitude: p.latitude,
         longitude: p.longitude,
-        seo_title: isBoulevard ? 'AL REHAB CENTER Jeddah | REFERESTATES Private Discovery' : (p.seo_title || `${p.name} | REFERESTATES`),
-        seo_description: isBoulevard ? 'Discover AL REHAB CENTER in Jeddah by Tamleek Al Nahdi. Exceptional commercial suites, retail boutiques, and luxury residences presented by REFERESTATES.' : (p.seo_description || p.short_description || p.description),
+        seo_title: isRehab ? 'AL REHAB CENTER Jeddah | Tamleek Al Nahdi | REFERESTATES' : (p.seo_title || `${p.name} | REFERESTATES`),
+        seo_description: isRehab ? 'Discover AL REHAB CENTER in Jeddah by Tamleek Al Nahdi. Starting from SAR 390k, 63.74m² - 311.80 m², Handover 12/2027. Commercial showrooms & residential luxury suites.' : (p.seo_description || p.short_description || p.description),
         notes: p.notes,
         images: allImages,
-        highlights: normalizeHighlights([], notesJson),
-        amenities: normalizeAmenities([], notesJson),
-        nearby_places: normalizeNearby(notesJson, isBoulevard ? 'Jeddah' : p.city, isBoulevard ? 'Al Rehab District' : p.district),
-        why_consider: normalizeWhyConsider(notesJson),
-        unit_types: notesJson.unit_types
+        highlights: isRehab ? fallbackProjects[0].highlights : normalizeHighlights([], notesJson),
+        amenities: isRehab ? fallbackProjects[0].amenities : normalizeAmenities([], notesJson),
+        nearby_places: isRehab ? fallbackProjects[0].nearby_places : normalizeNearby(notesJson, isRehab ? 'Jeddah' : p.city, isRehab ? 'Al Rehab District' : p.district),
+        why_consider: isRehab ? fallbackProjects[0].why_consider : normalizeWhyConsider(notesJson),
+        unit_types: isRehab ? fallbackProjects[0].unit_types : notesJson.unit_types
       };
     });
   } catch (err) {
@@ -353,15 +394,23 @@ export async function fetchProject(identifier: string): Promise<Project> {
       throw new Error(`Property not found: ${identifier}`);
     }
 
-    const isBoulevard = (data.name && /boulevard/i.test(data.name)) || (data.slug && /boulevard/i.test(data.slug));
+    const isRehab = (data.name && (/rehab/i.test(data.name) || /boulevard/i.test(data.name))) || (data.slug && (/rehab/i.test(data.slug) || /boulevard/i.test(data.slug)));
     const notesJson = parseNotesJson(data.notes);
     const mediaImages = (data.property_media || [])
       .filter((m: any) => !m.media_type || m.media_type === 'image')
       .sort((a: any, b: any) => (a.sort_order || 0) - (b.sort_order || 0))
       .map((m: any) => m.url);
 
-    const allImages = isBoulevard
-      ? ["/al-rehab-center.webp", ...mediaImages]
+    const rehabImages = [
+      "/al-rehab-center.webp",
+      "/rehab-facade.jpg",
+      "/rehab-living-room.jpg",
+      "/rehab-bedroom.jpg",
+      "/rehab-staircase.jpg"
+    ];
+
+    const allImages = isRehab
+      ? rehabImages
       : (data.hero_image_url 
         ? [data.hero_image_url, ...mediaImages.filter((u: string) => u !== data.hero_image_url)]
         : mediaImages.length > 0 
@@ -370,44 +419,44 @@ export async function fetchProject(identifier: string): Promise<Project> {
 
     return {
       id: data.id,
-      slug: isBoulevard ? 'al-rehab-center' : (data.slug || data.id),
-      name: isBoulevard ? 'AL REHAB CENTER' : data.name,
-      developer: isBoulevard ? 'Tamleek Al Nahdi' : (data.developers?.name || notesJson.developer_name || 'Independent Luxury Developer'),
+      slug: isRehab ? 'al-rehab-center' : (data.slug || data.id),
+      name: isRehab ? 'AL REHAB CENTER' : data.name,
+      developer: isRehab ? 'Tamleek Al Nahdi' : (data.developers?.name || notesJson.developer_name || 'Independent Luxury Developer'),
       developer_id: data.developer_id,
-      city: isBoulevard ? 'Jeddah' : (data.city || 'Riyadh'),
-      district: isBoulevard ? 'Al Rehab District' : (data.district || ''),
-      address: isBoulevard ? 'Palestine Street / Prince Mutaib Axis, Al Rehab, Jeddah' : (data.address || ''),
-      location: isBoulevard ? 'Al Rehab, Jeddah' : (data.district ? `${data.district}, ${data.city}` : (data.city || 'Saudi Arabia')),
-      category: isBoulevard ? 'Commercial & Luxury Residential Complex' : (data.property_type || 'Residential'),
-      property_type: isBoulevard ? 'Commercial & Residential Center' : (data.property_type || 'Residential'),
-      description: isBoulevard ? 'A premier commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi, featuring illuminated facade architecture, ground floor boutique retail, and luxury residential apartments.' : (data.description || data.short_description || 'A prestigious residential development in Saudi Arabia.'),
-      short_description: isBoulevard ? 'Modern commercial & residential landmark in Jeddah by Tamleek Al Nahdi.' : (data.short_description || data.description?.substring(0, 160) || ''),
-      bedrooms: data.bedrooms || '',
-      bathrooms: data.bathrooms || '',
-      size: data.size || '',
-      starting_price: data.starting_price ? Number(data.starting_price) : undefined,
+      city: isRehab ? 'Jeddah' : (data.city || 'Riyadh'),
+      district: isRehab ? 'Al Rehab District' : (data.district || ''),
+      address: isRehab ? 'Prince Mutaib bin Abdulaziz Road, Al Rehab, Jeddah' : (data.address || ''),
+      location: isRehab ? 'Al Rehab, Jeddah' : (data.district ? `${data.district}, ${data.city}` : (data.city || 'Saudi Arabia')),
+      category: isRehab ? 'Premium Mixed-Use (Commercial & Residential)' : (data.property_type || 'Residential'),
+      property_type: isRehab ? 'Premium Mixed-Use (Commercial & Residential)' : (data.property_type || 'Residential'),
+      description: isRehab ? 'A prominent mixed-use development situated directly on Prince Mutaib bin Abdulaziz Road in Al Rehab District, Jeddah. Developed by Tamleek Al Nahdi, AL REHAB CENTER combines premier ground-floor commercial showrooms and retail boutiques with luxury residential suites, secure basement parking, and expansive private rooftop terraces.' : (data.description || data.short_description || 'A prestigious residential development in Saudi Arabia.'),
+      short_description: isRehab ? 'Premium mixed-use commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi.' : (data.short_description || data.description?.substring(0, 160) || ''),
+      bedrooms: isRehab ? 'Commercial Showrooms & Residential Suites' : (data.bedrooms || ''),
+      bathrooms: isRehab ? '1 - 4 Bathrooms' : (data.bathrooms || ''),
+      size: isRehab ? '63.74m² - 311.80 m²' : (data.size || ''),
+      starting_price: isRehab ? 390000 : (data.starting_price ? Number(data.starting_price) : undefined),
       currency: data.currency || 'SAR',
-      payment_plan: data.payment_plan || '',
-      handover_date: data.handover_date || '',
-      furnished_status: data.furnished_status || 'Unfurnished',
-      status: data.status || 'Available',
+      payment_plan: isRehab ? '' : (data.payment_plan || ''),
+      handover_date: isRehab ? '12/2027' : (data.handover_date || ''),
+      furnished_status: isRehab ? 'Premium High Specification' : (data.furnished_status || 'Unfurnished'),
+      status: isRehab ? 'Under Construction' : (data.status || 'Available'),
       featured: Boolean(data.featured),
-      hero_image_url: isBoulevard ? "/al-rehab-center.webp" : (data.hero_image_url || allImages[0]),
+      hero_image_url: isRehab ? "/al-rehab-center.webp" : (data.hero_image_url || allImages[0]),
       floor_plan_url: data.floor_plan_url || notesJson.floor_plan_url || '',
       video_url: notesJson.video_url || '',
       virtual_tour_url: notesJson.virtual_tour_url || '',
       brochure_url: notesJson.brochure_url || '',
       latitude: data.latitude,
       longitude: data.longitude,
-      seo_title: isBoulevard ? 'AL REHAB CENTER Jeddah | REFERESTATES Private Discovery' : (data.seo_title || `${data.name} | REFERESTATES Private Discovery`),
-      seo_description: isBoulevard ? 'Discover AL REHAB CENTER in Jeddah by Tamleek Al Nahdi. Exceptional commercial suites, retail boutiques, and luxury residences presented by REFERESTATES.' : (data.seo_description || data.short_description || data.description),
+      seo_title: isRehab ? 'AL REHAB CENTER Jeddah | Tamleek Al Nahdi | REFERESTATES' : (data.seo_title || `${data.name} | REFERESTATES Private Discovery`),
+      seo_description: isRehab ? 'Discover AL REHAB CENTER in Jeddah by Tamleek Al Nahdi. Starting from SAR 390k, 63.74m² - 311.80 m², Handover 12/2027. Commercial showrooms & residential luxury suites.' : (data.seo_description || data.short_description || data.description),
       notes: data.notes,
       images: allImages,
-      highlights: normalizeHighlights([], notesJson),
-      amenities: normalizeAmenities([], notesJson),
-      nearby_places: normalizeNearby(notesJson, isBoulevard ? 'Jeddah' : data.city, isBoulevard ? 'Al Rehab District' : data.district),
-      why_consider: normalizeWhyConsider(notesJson),
-      unit_types: notesJson.unit_types
+      highlights: isRehab ? fallbackProjects[0].highlights : normalizeHighlights([], notesJson),
+      amenities: isRehab ? fallbackProjects[0].amenities : normalizeAmenities([], notesJson),
+      nearby_places: isRehab ? fallbackProjects[0].nearby_places : normalizeNearby(notesJson, isRehab ? 'Jeddah' : data.city, isRehab ? 'Al Rehab District' : data.district),
+      why_consider: isRehab ? fallbackProjects[0].why_consider : normalizeWhyConsider(notesJson),
+      unit_types: isRehab ? fallbackProjects[0].unit_types : notesJson.unit_types
     };
   } catch (err) {
     console.error("fetchProject execution error:", err);

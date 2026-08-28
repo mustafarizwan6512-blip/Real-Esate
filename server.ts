@@ -12,14 +12,25 @@ const db = {
       developer: "Tamleek Al Nahdi",
       city: "Jeddah",
       location: "Al Rehab, Jeddah",
-      category: "Commercial & Residential Center",
-      description: "A premier commercial and residential landmark in Al Rehab, Jeddah by Tamleek Al Nahdi, featuring illuminated facade architecture, ground floor boutique retail, and luxury residential suites.",
-      highlights: ["Illuminated Architectural Facade", "Ground Floor Boutique Promenade", "24/7 Security & Access Control"],
-      amenities: ["Shopping Promenade", "Executive Gym", "Monitored Parking"],
+      category: "Premium Mixed-Use (Commercial & Residential)",
+      description: "A prominent mixed-use development situated directly on Prince Mutaib bin Abdulaziz Road in Al Rehab District, Jeddah. Developed by Tamleek Al Nahdi, AL REHAB CENTER combines premier ground-floor commercial showrooms and retail boutiques with luxury residential suites, secure basement parking, and expansive private rooftop terraces.",
+      highlights: [
+        "SPORTS & WELLNESS DISTRICT: Situated just 250 meters from extensive public parks",
+        "COMMUNITY PARK & GARDENS: Only 70 meters from Al-Suroor Garden & Mosque",
+        "INTEGRATED SHOPPING CORRIDOR: Adjacent to commercial showrooms and retail malls",
+        "SECURE BASEMENT PARKING: 98 secure and designated underground parking slots",
+        "MAIN ROAD ACCESSIBILITY: Direct frontage on Prince Mutaib bin Abdulaziz Road",
+        "EXCLUSIVE ROOFTOP TERRACES: Luxury penthouse units with front and rear terraces"
+      ],
+      amenities: ["Commercial Showrooms", "98 Underground Parking Slots", "Private Rooftop Terraces", "24/7 Monitored Security"],
       images: [
         "/al-rehab-center.webp",
+        "/rehab-facade.jpg",
+        "/rehab-living-room.jpg",
+        "/rehab-bedroom.jpg",
+        "/rehab-staircase.jpg"
       ],
-      status: "Available",
+      status: "Under Construction",
       featured: true,
     },
     {

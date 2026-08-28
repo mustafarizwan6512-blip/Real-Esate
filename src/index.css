@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #BD5523;
+  --color-primary-dark: #9A4218;
+  --color-secondary: #1E2D4C;
+  --color-secondary-dark: #121A2F;
+  --color-cream: #F5F3EF;
+  --color-surface: #EBE5DA;
+  --color-dark: #111827;
+  
+  --color-gold: #C5A880;
+  --color-gold-light: #E2D1B8;
+  --color-gold-dark: #9D805B;
+  --color-navy-dark: #0B1322;
+  --color-navy-card: #111C30;
+  --color-navy-deep: #080E1A;
+  --color-teal-dark: #0B272C;
+  --color-teal-accent: #2DD4BF;
+
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+  --font-serif: 'Cormorant Garamond', 'Cinzel', Georgia, serif;
+  --font-cinzel: 'Cinzel', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+

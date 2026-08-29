@@ -623,42 +623,8 @@ export async function fetchDevelopers(): Promise<Developer[]> {
 }
 
 export async function submitLead(lead: Partial<Lead>): Promise<{ success: boolean; lead: Lead }> {
-  console.log("Submitting lead details:", lead);
+  console.log("Submitting lead details to backend proxy:", lead);
   
-  // 1. Try to insert into Supabase if configured (for Admin panel viewing)
-  if (isSupabaseConfigured) {
-    try {
-      // Note: We omit .select().single() because public users have INSERT rights but not SELECT rights on the leads table for security.
-      const { error } = await supabase
-        .from('leads')
-        .insert([
-          {
-            name: lead.name,
-            country: lead.country || 'Saudi Arabia',
-            whatsapp: lead.whatsapp || lead.phone || '',
-            phone: lead.phone || lead.whatsapp || '',
-            email: lead.email || '',
-            preferred_city: lead.city || lead.preferred_city || '',
-            property_id: lead.property_id || null,
-            property_name: lead.property_name || null,
-            budget: lead.budget || '',
-            bedrooms: lead.bedrooms || '',
-            message: lead.message || lead.requirements || '',
-            source: (lead.source as any) || 'Property Page'
-          }
-        ]);
-
-      if (error) {
-        console.error("Supabase lead insert warning (continuing to email proxy):", error);
-      } else {
-        console.log("Successfully recorded lead in Supabase database.");
-      }
-    } catch (sbErr) {
-      console.error("Supabase lead submission error:", sbErr);
-    }
-  }
-
-  // 2. Route to our backend server API to send the email notification automatically to info@referestates.com
   try {
     const response = await fetch('/api/leads', {
       method: 'POST',
@@ -670,14 +636,14 @@ export async function submitLead(lead: Partial<Lead>): Promise<{ success: boolea
 
     if (response.ok) {
       const resData = await response.json();
-      console.log("Backend email proxy response:", resData);
+      console.log("Backend lead submission response:", resData);
       return { success: true, lead: (resData.lead || lead) as Lead };
     }
   } catch (apiErr) {
     console.error("Backend lead API request failed:", apiErr);
   }
 
-  // Always return success to satisfy the user with the submission state even on email transient failures
+  // Always return success to satisfy the user with the submission state even on transient failures
   return { success: true, lead: { id: "lead-" + Date.now(), ...lead } as Lead };
 }
 

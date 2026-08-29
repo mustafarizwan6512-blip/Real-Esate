@@ -201,9 +201,53 @@ ${urls.map(u => `  <url>
     };
     db.leads.push(newLead);
 
+    // Insert into Supabase from the backend server securely using runtime environment variables
+    const supabaseUrl = process.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
+
+    if (supabaseUrl && supabaseAnonKey) {
+      try {
+        const { createClient } = await import("@supabase/supabase-js");
+        const supabaseServer = createClient(supabaseUrl, supabaseAnonKey);
+        
+        const isUUID = (str: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+        const safePropertyId = (req.body.property_id && isUUID(req.body.property_id)) ? req.body.property_id : null;
+
+        const { error } = await supabaseServer
+          .from('leads')
+          .insert([
+            {
+              name: req.body.name || 'Anonymous',
+              country: req.body.country || 'Saudi Arabia',
+              whatsapp: req.body.whatsapp || req.body.phone || '',
+              phone: req.body.phone || req.body.whatsapp || '',
+              email: req.body.email || '',
+              preferred_city: req.body.city || req.body.preferred_city || '',
+              property_id: safePropertyId,
+              property_name: req.body.property_name || null,
+              budget: req.body.budget || '',
+              bedrooms: req.body.bedrooms || '',
+              message: req.body.message || req.body.requirements || '',
+              source: req.body.source || 'Contact Form',
+              status: 'New'
+            }
+          ]);
+
+        if (error) {
+          console.error("[Supabase Server Insert Error]:", error);
+        } else {
+          console.log("[Supabase Server Success] Successfully saved lead to Supabase.");
+        }
+      } catch (sbErr) {
+        console.error("[Supabase Server Connection Error]:", sbErr);
+      }
+    } else {
+      console.warn("[Supabase Server Warning] VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY are missing on the server. Cannot save lead to Supabase.");
+    }
+
     // Send email automatically to info@referestates.com
     try {
-      const { name, email, phone, country, purpose, preferred_contact, message, property_name, property_id } = req.body;
+      const { name, email, phone, country, purpose, preferred_contact, message, requirements, property_name, property_id } = req.body;
 
       const mailHost = process.env.SMTP_HOST || 'smtp.gmail.com';
       const mailPort = parseInt(process.env.SMTP_PORT || '587');
@@ -256,7 +300,7 @@ ${urls.map(u => `  <url>
 
               <h3 style="color: #0f1c2c; border-bottom: 2px solid #cbb27a; padding-bottom: 8px; margin-top: 24px;">Message / Specific Requirements</h3>
               <p style="color: #333; line-height: 1.6; background-color: #f7f7f7; padding: 15px; border-left: 3px solid #cbb27a; font-style: italic; white-space: pre-line;">
-                ${message || 'No additional requirements specified.'}
+                ${message || requirements || 'No additional requirements specified.'}
               </p>
             </div>
             <div style="background-color: #f4f4f4; padding: 12px; text-align: center; font-size: 11px; color: #777; border-radius: 0 0 8px 8px;">

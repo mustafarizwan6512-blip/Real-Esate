@@ -237,98 +237,41 @@ ${urls.map(u => `  <url>
           console.error("[Supabase Server Insert Error]:", error);
         } else {
           console.log("[Supabase Server Success] Successfully saved lead to Supabase.");
+          
+          // Trigger the Supabase Edge Function to deliver the email via Resend
+          try {
+            console.log("[Edge Function Trigger] Invoking send-lead-email Edge Function...");
+            const { data: funcData, error: funcError } = await supabaseServer.functions.invoke('send-lead-email', {
+              body: {
+                name: req.body.name || 'Anonymous',
+                email: req.body.email || '',
+                phone: req.body.phone || req.body.whatsapp || '',
+                whatsapp: req.body.whatsapp || req.body.phone || '',
+                country: req.body.country || 'Saudi Arabia',
+                preferred_city: req.body.city || req.body.preferred_city || '',
+                property_name: req.body.property_name || 'General Inquiry',
+                budget: req.body.budget || '',
+                bedrooms: req.body.bedrooms || '',
+                message: req.body.message || req.body.requirements || '',
+                source: req.body.source || 'Contact Form',
+                created_at: new Date().toISOString()
+              }
+            });
+
+            if (funcError) {
+              console.error("[Edge Function Error] Failed to invoke send-lead-email:", funcError);
+            } else {
+              console.log("[Edge Function Success] send-lead-email completed:", funcData);
+            }
+          } catch (funcCallErr) {
+            console.error("[Edge Function Invoke Catch Error]:", funcCallErr);
+          }
         }
       } catch (sbErr) {
         console.error("[Supabase Server Connection Error]:", sbErr);
       }
     } else {
       console.warn("[Supabase Server Warning] VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY are missing on the server. Cannot save lead to Supabase.");
-    }
-
-    // Send email automatically to info@referestates.com
-    try {
-      const { name, email, phone, country, purpose, preferred_contact, message, requirements, property_name, property_id } = req.body;
-
-      const mailHost = process.env.SMTP_HOST || 'smtp.gmail.com';
-      const mailPort = parseInt(process.env.SMTP_PORT || '587');
-      const mailUser = process.env.SMTP_USER;
-      const mailPass = process.env.SMTP_PASS;
-
-      const mailOptions = {
-        from: mailUser ? `"REFERESTATES Lead System" <${mailUser}>` : '"REFERESTATES Lead System" <no-reply@referestates.com>',
-        to: "info@referestates.com",
-        subject: `New Property Inquiry: ${property_name || 'General Inquiry'} - ${name}`,
-        html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 8px;">
-            <div style="background-color: #0f1c2c; padding: 15px; text-align: center; border-radius: 6px 6px 0 0;">
-              <h2 style="color: #cbb27a; margin: 0; font-size: 20px; letter-spacing: 2px;">REFERESTATES ADVISORY</h2>
-              <p style="color: #ffffff; margin: 5px 0 0 0; font-size: 12px; letter-spacing: 1px;">NEW PROPERTY INQUIRY</p>
-            </div>
-            <div style="padding: 20px; background-color: #fdfdfb;">
-              <h3 style="color: #0f1c2c; border-bottom: 2px solid #cbb27a; padding-bottom: 8px; margin-top: 0;">Inquiry Details</h3>
-              
-              <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; width: 180px; color: #555;">Lead Name:</td>
-                  <td style="padding: 8px 0; color: #111;">${name || 'N/A'}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Email Address:</td>
-                  <td style="padding: 8px 0; color: #111;"><a href="mailto:${email}">${email || 'N/A'}</a></td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Phone / WhatsApp:</td>
-                  <td style="padding: 8px 0; color: #111;">${phone || 'N/A'}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Country of Residence:</td>
-                  <td style="padding: 8px 0; color: #111;">${country || 'N/A'}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Target Property:</td>
-                  <td style="padding: 8px 0; color: #cbb27a; font-weight: bold;">${property_name || 'General Inquiry'} (ID: ${property_id || 'N/A'})</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Purchasing Purpose:</td>
-                  <td style="padding: 8px 0; color: #111;">${purpose || 'N/A'}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Preferred Contact:</td>
-                  <td style="padding: 8px 0; color: #111; font-weight: bold;">${preferred_contact || 'N/A'}</td>
-                </tr>
-              </table>
-
-              <h3 style="color: #0f1c2c; border-bottom: 2px solid #cbb27a; padding-bottom: 8px; margin-top: 24px;">Message / Specific Requirements</h3>
-              <p style="color: #333; line-height: 1.6; background-color: #f7f7f7; padding: 15px; border-left: 3px solid #cbb27a; font-style: italic; white-space: pre-line;">
-                ${message || requirements || 'No additional requirements specified.'}
-              </p>
-            </div>
-            <div style="background-color: #f4f4f4; padding: 12px; text-align: center; font-size: 11px; color: #777; border-radius: 0 0 8px 8px;">
-              This inquiry was automatically processed by the REFERESTATES Lead Engine on ${new Date().toLocaleString()}.
-            </div>
-          </div>
-        `
-      };
-
-      if (mailUser && mailPass) {
-        const transporter = nodemailer.createTransport({
-          host: mailHost,
-          port: mailPort,
-          secure: mailPort === 465,
-          auth: {
-            user: mailUser,
-            pass: mailPass
-          }
-        });
-
-        await transporter.sendMail(mailOptions);
-        console.log(`[Email Success] Lead email sent successfully to info@referestates.com via SMTP`);
-      } else {
-        console.warn(`[Email Warning] SMTP credentials (SMTP_USER, SMTP_PASS) are not defined in the environment variables. Mocking email sending instead.`);
-        console.log(`[Mock Email] Sent lead notification to info@referestates.com:`, mailOptions.subject);
-      }
-    } catch (emailError) {
-      console.error("[Email Error] Failed to send lead notification mail:", emailError);
     }
 
     res.json({ success: true, lead: newLead });

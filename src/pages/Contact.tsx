@@ -110,7 +110,7 @@ export default function Contact() {
                   <div className="w-8 h-8 bg-primary/10 flex items-center justify-center text-primary">
                     <MapPin size={14} />
                   </div>
-                  <span>Riyadh & Jeddah, Kingdom of Saudi Arabia</span>
+                  <span>Jeddah, Kingdom of Saudi Arabia</span>
                 </div>
               </div>
             </div>

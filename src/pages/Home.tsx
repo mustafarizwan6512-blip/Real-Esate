@@ -47,8 +47,8 @@ export default function Home() {
     "priceRange": "SAR 390,000 - SAR 50,000,000+",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Riyadh",
-      "addressRegion": "Riyadh Province",
+      "addressLocality": "Jeddah",
+      "addressRegion": "Makkah Province",
       "addressCountry": "SA"
     },
     "description": "Curating high-yield luxury real estate, off-plan commercial centers, and residential apartments across Riyadh and Jeddah.",

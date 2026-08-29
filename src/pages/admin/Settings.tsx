@@ -19,7 +19,7 @@ export default function Settings() {
     contact_phone: '+966 53 660 9534',
     contact_whatsapp: '+966 53 660 9534',
     contact_email: 'info@referestates.com',
-    office_address: 'Riyadh, Kingdom of Saudi Arabia',
+    office_address: 'Jeddah, Kingdom of Saudi Arabia',
     tiktok_url: 'https://www.tiktok.com/@referestates',
     instagram_url: 'https://www.instagram.com/referestates?igsi=NGlwdXVmOGwzcW15',
     facebook_url: 'https://www.facebook.com/profile.php?id=61593521009451',

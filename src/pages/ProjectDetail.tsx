@@ -495,7 +495,7 @@ export default function ProjectDetail() {
               <div className="p-5 bg-surface border border-secondary/10 hover:border-primary/40 transition-colors">
                 <Compass className="w-5 h-5 text-primary mb-3" />
                 <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">Location</span>
-                <p className="text-sm font-display font-semibold text-secondary mt-1 truncate">{project.location}</p>
+                <p className="text-xs sm:text-sm font-display font-semibold text-secondary mt-1 break-words leading-snug">{project.location}</p>
               </div>
             )}
 
@@ -503,7 +503,7 @@ export default function ProjectDetail() {
               <div className="p-5 bg-surface border border-secondary/10 hover:border-primary/40 transition-colors">
                 <Building2 className="w-5 h-5 text-primary mb-3" />
                 <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">Type</span>
-                <p className="text-sm font-display font-semibold text-secondary mt-1 truncate">{project.category}</p>
+                <p className="text-[11px] sm:text-xs md:text-sm font-display font-semibold text-secondary mt-1 break-words leading-tight">{project.category}</p>
               </div>
             )}
 
@@ -511,7 +511,7 @@ export default function ProjectDetail() {
               <div className="p-5 bg-surface border border-secondary/10 hover:border-primary/40 transition-colors">
                 <Maximize2 className="w-5 h-5 text-primary mb-3" />
                 <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">Area / Size</span>
-                <p className="text-sm font-display font-semibold text-secondary mt-1 truncate">{project.size}</p>
+                <p className="text-xs sm:text-sm font-display font-semibold text-secondary mt-1 break-words leading-snug">{project.size}</p>
               </div>
             )}
 
@@ -519,7 +519,7 @@ export default function ProjectDetail() {
               <div className="p-5 bg-surface border border-secondary/10 hover:border-primary/40 transition-colors">
                 <Bed className="w-5 h-5 text-primary mb-3" />
                 <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">Bedrooms</span>
-                <p className="text-sm font-display font-semibold text-secondary mt-1 truncate">{project.bedrooms}</p>
+                <p className="text-[11px] sm:text-xs md:text-sm font-display font-semibold text-secondary mt-1 break-words leading-tight">{project.bedrooms}</p>
               </div>
             )}
 
@@ -527,15 +527,15 @@ export default function ProjectDetail() {
               <div className="p-5 bg-surface border border-secondary/10 hover:border-primary/40 transition-colors">
                 <Calendar className="w-5 h-5 text-primary mb-3" />
                 <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">Handover</span>
-                <p className="text-sm font-display font-semibold text-secondary mt-1 truncate">{project.handover_date}</p>
+                <p className="text-xs sm:text-sm font-display font-semibold text-secondary mt-1 break-words leading-snug">{project.handover_date}</p>
               </div>
             )}
 
             {project.status && (
               <div className="p-5 bg-surface border border-secondary/10 hover:border-primary/40 transition-colors">
                 <Sparkles className="w-5 h-5 text-primary mb-3" />
-                <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">Availability</span>
-                <p className="text-sm font-display font-semibold text-secondary mt-1 truncate">{project.status}</p>
+                <span className="block text-[10px] uppercase font-display font-bold tracking-widest text-secondary/60">STATUS</span>
+                <p className="text-xs sm:text-sm font-display font-semibold text-secondary mt-1 break-words leading-snug">{project.status}</p>
               </div>
             )}
           </div>
@@ -810,7 +810,7 @@ export default function ProjectDetail() {
                   </div>
                 )}
 
-                {project.size && (
+                {project.size && project.id !== '2' && (
                   <div className="flex items-center justify-between p-5">
                     <span className="text-xs uppercase tracking-wider text-secondary/60 font-display font-bold flex items-center gap-2">
                       <Maximize2 size={15} className="text-primary" />
@@ -1049,9 +1049,9 @@ export default function ProjectDetail() {
                   <CheckCircle2 size={32} />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="font-display font-bold text-2xl text-secondary uppercase">Inquiry Received</h3>
+                  <h3 className="font-display font-bold text-2xl text-secondary uppercase">Request is submitted</h3>
                   <p className="text-sm text-secondary/70 max-w-md mx-auto leading-relaxed font-body">
-                    Thank you for your interest in <span className="text-primary font-bold">{project.name}</span>. A REFERESTATES senior advisor has been assigned to your request and will reach out shortly.
+                    Your inquiry has been successfully submitted. Thank you for your interest in <span className="text-primary font-bold">{project.name}</span>. A REFERESTATES senior advisor has been assigned to your request and will reach out shortly.
                   </p>
                 </div>
                 <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">

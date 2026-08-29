@@ -1,8 +1,111 @@
 import { Project, Developer, Location, Lead, ProjectHighlight, ProjectAmenity, NearbyPlace, WhyConsiderItem, UnitType } from './types';
 import { supabase, isSupabaseConfigured } from './lib/supabase';
 
+export const parkResidence2Project: Project = {
+  id: "2",
+  slug: "park-residence-2",
+  name: "PARK RESIDENCE 2",
+  developer: "REAL Real Estate",
+  city: "Jeddah",
+  district: "Darb Al Haramain",
+  address: "Darb Al Haramain, Jeddah",
+  location: "Darb Al Haramain, Jeddah",
+  category: "Residential, Premium Penthouse, commercial",
+  property_type: "Residential, Premium Penthouse, commercial",
+  description: "A breathtaking high-rise development situated in Darb Al Haramain. PARK RESIDENCE 2 combines absolute luxury with modern design. Developed by REAL Real Estate, this under-construction property features direct views of the central park, surrounded by lush greenery, walking paths, and world-class retail spaces.",
+  short_description: "Premium residential, penthouse, and commercial suites in Darb Al Haramain by REAL Real Estate.",
+  bedrooms: "Premium Penthouses & Residential Suites",
+  bathrooms: "3+ Bathrooms",
+  size: "14.89 Million SQ FT",
+  starting_price: 320000,
+  currency: "SAR",
+  handover_date: "2028",
+  furnished_status: "Premium High Specification",
+  status: "Under Construction",
+  featured: true,
+  hero_image_url: "/image.png",
+  images: [
+    "/image.png",
+    "/park_facade.jpg",
+    "/park_entrance.jpg",
+    "/park_amenities.jpg",
+    "/park_guarantees.jpg",
+    "/park_view.jpg"
+  ],
+  highlights: [
+    {
+      title: "CENTRAL PARK",
+      description: "Prime location with direct views of the central park, surrounded by lush greenery and walking paths.",
+      icon: "Trees"
+    },
+    {
+      title: "Smart Home System",
+      description: "Enhanced security and convenience through digital access controls.",
+      icon: "Sparkles"
+    },
+    {
+      title: "Surveillance System",
+      description: "24/7 surveillance systems are active throughout the property.",
+      icon: "ShieldCheck"
+    },
+    {
+      title: "Gym",
+      description: "A fully equipped fitness center",
+      icon: "Dumbbell"
+    },
+    {
+      title: "AC Community Hall",
+      description: "A climate-controlled communal space for resident gatherings and events",
+      icon: "Building"
+    },
+    {
+      title: "Firefighting System",
+      description: "Integrated safety systems built to high-quality construction and professional standards",
+      icon: "Shield"
+    }
+  ],
+  amenities: [
+    { title: "24/7 Surveillance System", description: "24/7 surveillance systems are active throughout the property.", icon: "ShieldCheck" },
+    { title: "Smart Home System", description: "Enhanced security and convenience through digital access controls.", icon: "Sparkles" },
+    { title: "Fully Equipped Gym", description: "A fully equipped fitness center", icon: "Dumbbell" },
+    { title: "AC Community Hall", description: "A climate-controlled communal space for resident gatherings and events", icon: "Building" },
+    { title: "Integrated Firefighting System", description: "Integrated safety systems built to high-quality construction and professional standards", icon: "Shield" }
+  ],
+  nearby_places: [
+    { name: "CENTRAL PARK", category: "Park & Nature", distance: "Direct View", time: "Immediate" },
+    { name: "King Abdulaziz University", category: "Education", distance: "Nearby", time: "5 mins" },
+    { name: "Haramain High-Speed Railway station", category: "Railway", distance: "Convenient Access", time: "8 mins" },
+    { name: "Andalus Mall and Salam Mall", category: "Malls & Retail", distance: "Nearby", time: "6 mins" },
+    { name: "King Fahd Medical Research Library & Center", category: "Medical Research", distance: "Nearby", time: "4 mins" },
+    { name: "King Abdulaziz International Airport", category: "Airport", distance: "Airport Hub", time: "20 mins" },
+    { name: "King Abdullah Road", category: "Landmark Arterial Road", distance: "Direct Access", time: "1 min" }
+  ],
+  why_consider: [
+    {
+      title: "Developed by REAL Real Estate",
+      description: "Exceptional modern architecture and construction standards with high quality execution."
+    },
+    {
+      title: "Darb Al Haramain Location",
+      description: "Prime location offering spectacular direct views of the central park and city skyline."
+    },
+    {
+      title: "Excellent Pricing & Terms",
+      description: "Highly competitive starting price of SAR 320k for an ultra-premium development."
+    }
+  ],
+  unit_types: [
+    { type: "Premium Penthouse Suite", beds: "3 - 5 Beds", bathrooms: "3 - 5 Baths", size: "14.89 Million SQ FT", price: "Starting from SAR 320,000", availability: "Under Construction" },
+    { type: "Luxury Residential Apartment", beds: "1 - 3 Beds", bathrooms: "2 - 4 Baths", size: "14.89 Million SQ FT", price: "Starting from SAR 320,000", availability: "Under Construction" },
+    { type: "Commercial Boutique Showroom", beds: "Retail", bathrooms: "1 - 2 Baths", size: "14.89 Million SQ FT", price: "Starting from SAR 320,000", availability: "Under Construction" }
+  ],
+  seo_title: "PARK RESIDENCE 2 Jeddah | REAL Real Estate | REFERESTATES",
+  seo_description: "Discover PARK RESIDENCE 2 in Jeddah by REAL Real Estate. Starting from SAR 320k, 14.89 Million SQ FT, Handover 2028. Premium residential, penthouses & commercial luxury suites."
+};
+
 // High-end fallback demo projects for when Supabase is initially empty or offline
 export const fallbackProjects: Project[] = [
+  parkResidence2Project,
   {
     id: "al-rehab-center",
     slug: "al-rehab-center",
@@ -290,6 +393,9 @@ export async function fetchProjects(): Promise<Project[]> {
     
     // Map Supabase schema to frontend schema
     return data.map((p: any) => {
+      if (p.id === '2' || p.slug === 'marina-residences' || p.slug === 'park-residence-2' || p.id === 'bbbbbbbb-2222-2222-2222-222222222222') {
+        return parkResidence2Project;
+      }
       const isRehab = (p.name && (/rehab/i.test(p.name) || /boulevard/i.test(p.name))) || (p.slug && (/rehab/i.test(p.slug) || /boulevard/i.test(p.slug)));
       const notesJson = parseNotesJson(p.notes);
       const mediaImages = (p.property_media || [])
@@ -362,6 +468,11 @@ export async function fetchProjects(): Promise<Project[]> {
 }
 
 export async function fetchProject(identifier: string): Promise<Project> {
+  const cleanId = (identifier || '').toLowerCase();
+  if (cleanId === '2' || cleanId === 'marina-residences' || cleanId === 'park-residence-2' || cleanId === 'bbbbbbbb-2222-2222-2222-222222222222') {
+    return parkResidence2Project;
+  }
+
   if (!isSupabaseConfigured) {
     const match = fallbackProjects.find(p => p.id === identifier || p.slug === identifier);
     return match || fallbackProjects[0];

@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import nodemailer from "nodemailer";
 import { createServer as createViteServer } from "vite";
 
 // In-memory data store for the prototype
@@ -35,19 +36,41 @@ const db = {
     },
     {
       id: "2",
-      name: "Marina Residences",
-      developer: "Dar Al Arkan",
+      slug: "park-residence-2",
+      name: "PARK RESIDENCE 2",
+      developer: "REAL Real Estate",
       city: "Jeddah",
-      location: "Jeddah Corniche",
-      category: "Apartment",
-      description: "A luxurious seaside high-rise apartment building in Jeddah with expansive glass balconies.",
-      highlights: ["Sea Views", "Infinity Pool", "Smart Home Integration"],
-      amenities: ["Pool", "Spa", "Valet"],
-      images: [
-        "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-      ],
-      status: "Limited Availability",
+      location: "Darb Al Haramain, Jeddah",
+      category: "Residential, Premium Penthouse, commercial",
+      property_type: "Residential, Premium Penthouse, commercial",
+      description: "A breathtaking high-rise development situated in Darb Al Haramain. PARK RESIDENCE 2 combines absolute luxury with modern design. Developed by REAL Real Estate, this under-construction property features direct views of the central park, surrounded by lush greenery, walking paths, and world-class retail spaces.",
+      short_description: "Premium residential, penthouse, and commercial suites in Darb Al Haramain by REAL Real Estate.",
+      bedrooms: "Premium Penthouses & Residential Suites",
+      bathrooms: "3+ Bathrooms",
+      size: "14.89 Million SQ FT",
+      starting_price: 320000,
+      currency: "SAR",
+      handover_date: "2028",
+      furnished_status: "Premium High Specification",
+      status: "Under Construction",
       featured: true,
+      images: [
+        "/image.png",
+        "/park_facade.jpg",
+        "/park_entrance.jpg",
+        "/park_amenities.jpg",
+        "/park_guarantees.jpg",
+        "/park_view.jpg"
+      ],
+      highlights: [
+        "CENTRAL PARK: Prime location with direct views of the central park, surrounded by lush greenery and walking paths.",
+        "Smart Home System: Enhanced security and convenience through digital access controls.",
+        "Surveillance System: 24/7 surveillance systems are active throughout the property.",
+        "Gym: A fully equipped fitness center",
+        "AC Community Hall: A climate-controlled communal space for resident gatherings and events",
+        "Firefighting System: Integrated safety systems built to high-quality construction and professional standards"
+      ],
+      amenities: ["24/7 Surveillance System", "Smart Home System", "Fully Equipped Gym", "AC Community Hall", "Integrated Firefighting System"],
     },
     {
       id: "3",
@@ -169,7 +192,7 @@ ${urls.map(u => `  <url>
     res.json(db.developers);
   });
 
-  app.post("/api/leads", (req, res) => {
+  app.post("/api/leads", async (req, res) => {
     const newLead = {
       id: Date.now().toString(),
       ...req.body,
@@ -177,6 +200,93 @@ ${urls.map(u => `  <url>
       status: "New"
     };
     db.leads.push(newLead);
+
+    // Send email automatically to info@referestates.com
+    try {
+      const { name, email, phone, country, purpose, preferred_contact, message, property_name, property_id } = req.body;
+
+      const mailHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+      const mailPort = parseInt(process.env.SMTP_PORT || '587');
+      const mailUser = process.env.SMTP_USER;
+      const mailPass = process.env.SMTP_PASS;
+
+      const mailOptions = {
+        from: mailUser ? `"REFERESTATES Lead System" <${mailUser}>` : '"REFERESTATES Lead System" <no-reply@referestates.com>',
+        to: "info@referestates.com",
+        subject: `New Property Inquiry: ${property_name || 'General Inquiry'} - ${name}`,
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 8px;">
+            <div style="background-color: #0f1c2c; padding: 15px; text-align: center; border-radius: 6px 6px 0 0;">
+              <h2 style="color: #cbb27a; margin: 0; font-size: 20px; letter-spacing: 2px;">REFERESTATES ADVISORY</h2>
+              <p style="color: #ffffff; margin: 5px 0 0 0; font-size: 12px; letter-spacing: 1px;">NEW PROPERTY INQUIRY</p>
+            </div>
+            <div style="padding: 20px; background-color: #fdfdfb;">
+              <h3 style="color: #0f1c2c; border-bottom: 2px solid #cbb27a; padding-bottom: 8px; margin-top: 0;">Inquiry Details</h3>
+              
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; width: 180px; color: #555;">Lead Name:</td>
+                  <td style="padding: 8px 0; color: #111;">${name || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Email Address:</td>
+                  <td style="padding: 8px 0; color: #111;"><a href="mailto:${email}">${email || 'N/A'}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Phone / WhatsApp:</td>
+                  <td style="padding: 8px 0; color: #111;">${phone || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Country of Residence:</td>
+                  <td style="padding: 8px 0; color: #111;">${country || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Target Property:</td>
+                  <td style="padding: 8px 0; color: #cbb27a; font-weight: bold;">${property_name || 'General Inquiry'} (ID: ${property_id || 'N/A'})</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Purchasing Purpose:</td>
+                  <td style="padding: 8px 0; color: #111;">${purpose || 'N/A'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold; color: #555;">Preferred Contact:</td>
+                  <td style="padding: 8px 0; color: #111; font-weight: bold;">${preferred_contact || 'N/A'}</td>
+                </tr>
+              </table>
+
+              <h3 style="color: #0f1c2c; border-bottom: 2px solid #cbb27a; padding-bottom: 8px; margin-top: 24px;">Message / Specific Requirements</h3>
+              <p style="color: #333; line-height: 1.6; background-color: #f7f7f7; padding: 15px; border-left: 3px solid #cbb27a; font-style: italic; white-space: pre-line;">
+                ${message || 'No additional requirements specified.'}
+              </p>
+            </div>
+            <div style="background-color: #f4f4f4; padding: 12px; text-align: center; font-size: 11px; color: #777; border-radius: 0 0 8px 8px;">
+              This inquiry was automatically processed by the REFERESTATES Lead Engine on ${new Date().toLocaleString()}.
+            </div>
+          </div>
+        `
+      };
+
+      if (mailUser && mailPass) {
+        const transporter = nodemailer.createTransport({
+          host: mailHost,
+          port: mailPort,
+          secure: mailPort === 465,
+          auth: {
+            user: mailUser,
+            pass: mailPass
+          }
+        });
+
+        await transporter.sendMail(mailOptions);
+        console.log(`[Email Success] Lead email sent successfully to info@referestates.com via SMTP`);
+      } else {
+        console.warn(`[Email Warning] SMTP credentials (SMTP_USER, SMTP_PASS) are not defined in the environment variables. Mocking email sending instead.`);
+        console.log(`[Mock Email] Sent lead notification to info@referestates.com:`, mailOptions.subject);
+      }
+    } catch (emailError) {
+      console.error("[Email Error] Failed to send lead notification mail:", emailError);
+    }
+
     res.json({ success: true, lead: newLead });
   });
 

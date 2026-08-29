@@ -627,84 +627,92 @@ export async function submitLead(lead: Partial<Lead>): Promise<{ success: boolea
 
   // If Supabase is configured, submit directly from the client (critical for static environments like Vercel)
   if (isSupabaseConfigured) {
-    try {
-      console.log("[Client Supabase] Submitting lead directly to Supabase database...");
-
-      // Validate UUID for property_id to avoid PostgreSQL type error
-      const isUUID = (str?: string): boolean => {
-        if (!str) return false;
-        return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
-      };
-      const safePropertyId = isUUID(lead.property_id) ? lead.property_id : null;
-
-      // Handle lead_source Postgres enum mapping
-      const allowedSources = ['Website', 'Property Page', 'Contact Form', 'WhatsApp', 'Campaign', 'Other'];
-      let mappedSource = lead.source || 'Website';
-      if (!allowedSources.includes(mappedSource)) {
-        if (mappedSource.toLowerCase().includes('contact')) {
-          mappedSource = 'Contact Form';
-        } else if (mappedSource.toLowerCase().includes('property')) {
-          mappedSource = 'Property Page';
-        } else {
-          mappedSource = 'Other';
-        }
+    // Generate UUID client-side using crypto.randomUUID() so the lead has its ID without needing .select()
+    const generateUUID = (): string => {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID();
       }
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    };
 
-      const leadData = {
-        name: lead.name || 'Anonymous',
-        email: lead.email || null,
-        phone: lead.phone || lead.whatsapp || null,
-        whatsapp: lead.whatsapp || lead.phone || null,
-        country: lead.country || 'Saudi Arabia',
-        preferred_city: lead.preferred_city || lead.city || null,
-        property_id: safePropertyId,
-        property_name: lead.property_name || null,
-        budget: lead.budget || null,
-        bedrooms: lead.bedrooms || null,
-        message: lead.message || lead.requirements || null,
-        source: mappedSource,
-        status: 'New',
-        priority: 'Medium'
-      };
+    const leadId = generateUUID();
+    const createdAt = new Date().toISOString();
 
-      console.log("[Client Supabase] Inserting row:", leadData);
-      const { data, error } = await supabase
-        .from('leads')
-        .insert([leadData])
-        .select()
-        .single();
+    // Validate UUID for property_id to avoid PostgreSQL type error
+    const isUUID = (str?: string): boolean => {
+      if (!str) return false;
+      return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+    };
+    const safePropertyId = isUUID(lead.property_id) ? lead.property_id : null;
 
-      if (error) {
-        console.error("[Client Supabase Database Error] Failed to insert lead:", error);
-        throw error;
+    // Handle lead_source Postgres enum mapping
+    const allowedSources = ['Website', 'Property Page', 'Contact Form', 'WhatsApp', 'Campaign', 'Other'];
+    let mappedSource = lead.source || 'Website';
+    if (!allowedSources.includes(mappedSource)) {
+      if (mappedSource.toLowerCase().includes('contact')) {
+        mappedSource = 'Contact Form';
+      } else if (mappedSource.toLowerCase().includes('property')) {
+        mappedSource = 'Property Page';
+      } else {
+        mappedSource = 'Other';
       }
-
-      console.log("[Client Supabase Database Success] Row created:", data);
-
-      // Invoke send-lead-email Edge Function to dispatch Resend email notification
-      try {
-        console.log("[Client Supabase Edge Function] Triggering send-lead-email...");
-        const { data: funcData, error: funcError } = await supabase.functions.invoke('send-lead-email', {
-          body: {
-            ...leadData,
-            id: data.id,
-            created_at: data.created_at
-          }
-        });
-
-        if (funcError) {
-          console.error("[Client Supabase Edge Function Error] Failed to invoke email dispatch:", funcError);
-        } else {
-          console.log("[Client Supabase Edge Function Success] Function response:", funcData);
-        }
-      } catch (funcErr) {
-        console.error("[Client Supabase Edge Function Invoke Catch]:", funcErr);
-      }
-
-      return { success: true, lead: data as Lead };
-    } catch (sbErr) {
-      console.error("[Client Supabase Catch Error] Direct submission failed, falling back to local server API:", sbErr);
     }
+
+    const leadData = {
+      id: leadId,
+      name: lead.name || 'Anonymous',
+      email: lead.email || null,
+      phone: lead.phone || lead.whatsapp || null,
+      whatsapp: lead.whatsapp || lead.phone || null,
+      country: lead.country || 'Saudi Arabia',
+      preferred_city: lead.preferred_city || lead.city || null,
+      property_id: safePropertyId,
+      property_name: lead.property_name || null,
+      budget: lead.budget || null,
+      bedrooms: lead.bedrooms || null,
+      message: lead.message || lead.requirements || null,
+      source: mappedSource,
+      status: 'New',
+      priority: 'Medium',
+      created_at: createdAt
+    };
+
+    console.log("[Client Supabase] Inserting row (write-only for RLS compliance):", leadData);
+    
+    // Write-only insert: do NOT use .select() because RLS intentionally prevents public SELECT access
+    const { error: insertError } = await supabase
+      .from('leads')
+      .insert([leadData]);
+
+    if (insertError) {
+      console.error("[Client Supabase Database Error] Failed to insert lead:", insertError);
+      throw new Error(insertError.message || "Failed to save inquiry to database");
+    }
+
+    console.log("[Client Supabase Database Success] Lead inserted with ID:", leadId);
+
+    // Invoke resend-email Edge Function to dispatch Resend email notification
+    // Note: The lead database insertion remains successful even if the email function fails
+    try {
+      console.log("[Client Supabase Edge Function] Triggering resend-email...");
+      const { data: funcData, error: funcError } = await supabase.functions.invoke('resend-email', {
+        body: leadData
+      });
+
+      if (funcError) {
+        console.error("[Client Supabase Edge Function Error] Failed to invoke resend-email dispatch:", funcError);
+      } else {
+        console.log("[Client Supabase Edge Function Success] resend-email response:", funcData);
+      }
+    } catch (funcErr) {
+      console.error("[Client Supabase Edge Function Invoke Catch]:", funcErr);
+    }
+
+    return { success: true, lead: { ...lead, ...leadData } as Lead };
   }
 
   // Fallback to local server proxy if Supabase client is not configured
@@ -723,14 +731,14 @@ export async function submitLead(lead: Partial<Lead>): Promise<{ success: boolea
       console.log("[Local Fallback Success] Server lead submission response:", resData);
       return { success: true, lead: (resData.lead || lead) as Lead };
     } else {
-      console.warn("[Local Fallback Error] Server responded with status:", response.status);
+      const errorText = await response.text();
+      console.warn("[Local Fallback Error] Server responded with status:", response.status, errorText);
+      throw new Error(`Server responded with status ${response.status}`);
     }
-  } catch (apiErr) {
+  } catch (apiErr: any) {
     console.error("[Local Fallback Catch Error] Backend lead API request failed:", apiErr);
+    throw apiErr;
   }
-
-  // Fallback successful state to ensure premium UX is maintained under all circumstances
-  return { success: true, lead: { id: "lead-" + Date.now(), ...lead } as Lead };
 }
 
 export async function fetchWebsiteContent(section: string = 'homepage'): Promise<Record<string, string>> {

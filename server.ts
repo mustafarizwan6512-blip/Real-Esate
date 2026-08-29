@@ -240,8 +240,8 @@ ${urls.map(u => `  <url>
           
           // Trigger the Supabase Edge Function to deliver the email via Resend
           try {
-            console.log("[Edge Function Trigger] Invoking send-lead-email Edge Function...");
-            const { data: funcData, error: funcError } = await supabaseServer.functions.invoke('send-lead-email', {
+            console.log("[Edge Function Trigger] Invoking resend-email Edge Function...");
+            const { data: funcData, error: funcError } = await supabaseServer.functions.invoke('resend-email', {
               body: {
                 name: req.body.name || 'Anonymous',
                 email: req.body.email || '',
@@ -259,9 +259,9 @@ ${urls.map(u => `  <url>
             });
 
             if (funcError) {
-              console.error("[Edge Function Error] Failed to invoke send-lead-email:", funcError);
+              console.error("[Edge Function Error] Failed to invoke resend-email:", funcError);
             } else {
-              console.log("[Edge Function Success] send-lead-email completed:", funcData);
+              console.log("[Edge Function Success] resend-email completed:", funcData);
             }
           } catch (funcCallErr) {
             console.error("[Edge Function Invoke Catch Error]:", funcCallErr);

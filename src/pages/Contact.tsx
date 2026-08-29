@@ -21,18 +21,22 @@ export default function Contact() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage(null);
     try {
       await submitLead(formData);
       trackLeadSubmission('contact_page_form', formData.propertyType || formData.city || 'general_inquiry');
       setIsSubmitted(true);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error("Lead submission error:", error);
+      setErrorMessage(error?.message || "Failed to submit request. Please verify your connection or contact us via WhatsApp.");
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -180,6 +184,12 @@ export default function Contact() {
                   <label className="block font-display font-bold text-[10px] tracking-widest uppercase text-secondary/70 mb-2">Additional Requirements (Optional)</label>
                   <textarea name="requirements" value={formData.requirements} onChange={handleChange} placeholder="Specific developments of interest (e.g. AL REHAB CENTER), budget range, floor level..." rows={3} className="w-full bg-transparent border-b border-secondary/20 py-2 focus:outline-none focus:border-primary text-secondary placeholder-secondary/30 resize-none text-sm font-body"></textarea>
                 </div>
+
+                {errorMessage && (
+                  <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs font-body rounded">
+                    {errorMessage}
+                  </div>
+                )}
 
                 <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <p className="text-[11px] text-secondary/60 font-body">
